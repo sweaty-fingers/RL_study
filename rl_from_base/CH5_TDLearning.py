@@ -55,7 +55,7 @@ class GridWorld():
         self.y = 0
         return (self.x, self.y)
     
-class Agent():
+class Agent(): 
     def __init__(self):
         pass        
 

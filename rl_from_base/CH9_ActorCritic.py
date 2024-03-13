@@ -60,7 +60,7 @@ class ActorCritic(nn.Module):
         pi = self.pi(s, softmax_dim=1)
         pi_a = pi.gather(1,a)
         loss = -torch.log(pi_a) * delta.detach() + F.smooth_l1_loss(self.v(s), td_target.detach()) # delta 그레디언트가 축적되어 v 네트워크가 변하지 않도록 detach 메소드로 상수 취급해주기 (중요)
-        # 타겟도 마찬가지로 업데이트가 되면 안되므로 detach!
+        # 타겟도 마찬가지로 업데이트가 되면 안되므로 detach! # 정책 함수의 손실함수 + 밸류 함수의 손실함수
 
         self.optimizer.zero_grad()
         loss.mean().backward()

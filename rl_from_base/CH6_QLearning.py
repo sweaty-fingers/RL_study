@@ -161,7 +161,7 @@ class QAgent():
         next_x, next_y = s_prime
         a_prime = self.select_action(s_prime) # S'에서 선택할 액션 (실제로 취한 액션이 아님)
         # Q러닝 업데이트 식을 이용 
-        self.q_table[x,y,a] = self.q_table[x,y,a] + 0.1 * (r + np.amax(self.q_table[next_x,next_y,:]) - self.q_table[x,y,a])
+        self.q_table[x,y,a] = self.q_table[x,y,a] + 0.1 * (r + np.amax(self.q_table[next_x,next_y,:]) - self.q_table[x,y,a]) # off-policy 이기 때문에 입실론-그리디가 아닌 그리디 정책을 통해 q_next 값을 가져옴 r + self.q_table[next_x,next_y, :]
 
     def anneal_eps(self):
         self.eps -= 0.01  # Q러닝에선 epsilon 이 좀더 천천히 줄어 들도록 함.

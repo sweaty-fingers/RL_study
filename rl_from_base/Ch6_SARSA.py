@@ -86,11 +86,11 @@ class QAgent():
 
     def update_table(self, transition):
         s, a, r, s_prime = transition
-        x, y = s
+        x, y = s 
         next_x, next_y = s_prime
-        a_prime = self.select_action(s_prime) # S'에서 선택할 액션 (실제로 취한 액션이 아님) # 실제 취한 액션은 아직 모름
+        a_prime = self.select_action(s_prime) # S'에서 선택할 액션 (실제로 취한 액션이 아님) # 실제 취한 액션은 아직 모름 
         # SARSA 업데이트 식을 이용
-        self.q_table[x,y,a] = self.q_table[x,y,a] + 0.1 * (r + self.q_table[next_x,next_y,a_prime] - self.q_table[x,y,a])
+        self.q_table[x,y,a] = self.q_table[x,y,a] + 0.1 * (r + self.q_table[next_x,next_y,a_prime] - self.q_table[x,y,a]) # on-policy 이기 떄문에 입실론 그리디 정책(행동 정책)을 그대로 따름 r + self.q_table[next_x,next_y,a_prime]
 
     def anneal_eps(self):
         self.eps -= 0.03
